@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Monaco Editor Component</title>
+
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="../node_modules/monaco-editor/min/vs/editor/editor.main.css">
+
+    <style>
+        html, body {
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .toolbar {
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <label>Select Language</label>
+        <select>
+            <option value="/data/test.js" language="javascript">javascript</option>
+            <option value="/data/test.html" language="html">html</option>
+            <option value="/data/test.css" language="css">css</option>
+        </select>
+    </div>
+
+    <monaco-editor language="javascript"></monaco-editor>
+
+    <script type="module" async>
+        const editor = document.querySelector("monaco-editor");
+        document.querySelector("select").addEventListener("change", (event) => {
+            editor.language = event.target.selectedOptions[0].getAttribute("language");
+            editor.loadFile(event.target.value);
+        });
+
+        import "./component/monaco-editor.js"
+        editor.language = "javascript";
+        editor.loadFile("/data/test.js");
+    </script>
+</body>
+</html>
